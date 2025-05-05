@@ -94,7 +94,45 @@
 <script src="lib/jqueary-3.7.1.min.js"></script>
 
 <script>
+    const lightsCount = 6;
+    let currentLights = -1;
+    let direction = "RIGHT";
+    let intervalId = null;
 
+    updateLight = () => {
+      if (direction==="RIGHT") {
+
+        currentLights++;
+        $(".light").css("background", "white")
+        $(".light").eq(currentLights).css("background", "red")
+        $(".light").eq(currentLights-1).css("background", "hotpink")
+
+
+        if (currentLights === 5) {
+          direction = "LEFT";
+        }
+
+      } else {
+
+        currentLights--;
+        $(".light").css("background", "white")
+        $(".light").eq(currentLights).css("background", "red")
+        $(".light").eq(currentLights+1).css("background", "hotpink")
+
+        if (currentLights === 0) {
+          direction = "RIGHT";
+        }
+      }
+
+    }
+
+    $("#start").on('click',function (){
+      intervalId = setInterval(updateLight,100);
+    });
+
+    $("#stop").on('click',function (){
+      clearInterval(intervalId);
+    });
 </script>
 
 </body>
